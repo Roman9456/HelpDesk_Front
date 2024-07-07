@@ -3,9 +3,9 @@ import React from 'react';
 function DeleteModal({ onConfirm, onClose }) {
   return (
     <div className="modal">
-      <p>Вы уверены, что хотите удалить этот тикет?</p>
-      <button onClick={onConfirm}>Да</button>
-      <button onClick={onClose}>Нет</button>
+      <p>Are you sure you want to delete this ticket?</p>
+      <button onClick={onConfirm}>Yes</button>
+      <button onClick={onClose}>No</button>
     </div>
   );
 }

@@ -16,8 +16,12 @@ function App() {
   }, []);
 
   const loadTickets = async () => {
-    const tickets = await fetchTickets();
-    setTickets(tickets);
+    try {
+      const ticketsData = await fetchTickets();
+      setTickets(ticketsData);
+    } catch (error) {
+      console.error('Error loading tickets:', error.message);
+    }
   };
 
   const handleAddTicket = () => {
@@ -36,41 +40,49 @@ function App() {
   };
 
   const handleSaveTicket = async (ticket) => {
-    if (ticket.id) {
-      await updateTicket(ticket);
-    } else {
-      await addTicket(ticket);
+    try {
+      if (ticket.id) {
+        await updateTicket(ticket);
+      } else {
+        const newTicket = await addTicket(ticket);
+        setTickets([...tickets, newTicket]);
+      }
+      setTicketModalOpen(false);
+      loadTickets();
+    } catch (error) {
+      console.error('Error saving ticket:', error.message);
     }
-    setTicketModalOpen(false);
-    loadTickets();
   };
 
   const handleConfirmDelete = async () => {
-    await deleteTicket(ticketToDelete);
-    setDeleteModalOpen(false);
-    loadTickets();
+    try {
+      await deleteTicket(ticketToDelete);
+      setDeleteModalOpen(false);
+      loadTickets();
+    } catch (error) {
+      console.error(`Error deleting ticket with ID ${ticketToDelete}:`, error.message);
+    }
   };
 
   return (
     <div className="container">
       <header>
         <h1>HelpDesk</h1>
-        <button onClick={handleAddTicket}>Добавить тикет</button>
+        <button onClick={handleAddTicket}>Add Ticket</button>
       </header>
       <main>
         <TicketList
           tickets={tickets}
           onEdit={handleEditTicket}
           onDelete={handleDeleteTicket}
-          onView={(ticket) => alert(`Описание: ${ticket.description}`)}
+          onView={(ticket) => alert(`Description: ${ticket.description}`)}
         />
       </main>
       {isTicketModalOpen && (
         <TicketModal
           ticket={currentTicket}
-          onSubmit={handleSaveTicket} 
+          onSubmit={handleSaveTicket}
           onClose={() => setTicketModalOpen(false)}
-          isOpen={isTicketModalOpen}
         />
       )}
       {isDeleteModalOpen && (
@@ -84,4 +96,3 @@ function App() {
 }
 
 export default App;
-

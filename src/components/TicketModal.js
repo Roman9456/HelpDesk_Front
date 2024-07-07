@@ -44,22 +44,22 @@ class TicketModal extends Component {
                         name="name"
                         value={this.state.name}
                         onChange={this.handleChange}
-                        placeholder="Название"
+                        placeholder="Name"
                         required
                     />
                     <textarea
                         name="description"
                         value={this.state.description}
                         onChange={this.handleChange}
-                        placeholder="Описание"
+                        placeholder="Description"
                     />
                     <select name="status" value={this.state.status} onChange={this.handleChange}>
                         <option value="open">Open</option>
                         <option value="in-progress">In Progress</option>
                         <option value="closed">Closed</option>
                     </select>
-                    <button type="submit">Сохранить</button>
-                    <button type="button" onClick={onClose}>Отмена</button>
+                    <button type="submit">Save</button>
+                    <button type="button" onClick={onClose}>Cancel</button>
                 </form>
             </div>
         );
