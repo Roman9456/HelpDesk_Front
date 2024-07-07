@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpDesk</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HelpDesk</h1>
+            <button id="add-ticket-btn">Добавить тикет</button>
+        </header>
+        <main>
+            <ul id="ticket-list"></ul>
+        </main>
+    </div>
+
+    <!-- Модальные окна -->
+    <div id="modal-overlay" class="hidden">
+        <!-- Модальное окно добавления/редактирования тикета -->
+        <div id="ticket-modal" class="modal hidden">
+            <h2 id="modal-title">Добавить тикет</h2>
+            <form id="ticket-form">
+                <input type="text" id="ticket-title" placeholder="Название" required>
+                <textarea id="ticket-description" placeholder="Описание"></textarea>
+                <button type="submit">Сохранить</button>
+                <button type="button" id="close-modal">Отмена</button>
+            </form>
+        </div>
+        <!-- Модальное окно подтверждения удаления -->
+        <div id="delete-modal" class="modal hidden">
+            <p>Вы уверены, что хотите удалить этот тикет?</p>
+            <button id="confirm-delete">Да</button>
+            <button id="cancel-delete">Нет</button>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
