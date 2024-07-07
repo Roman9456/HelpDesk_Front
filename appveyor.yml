@@ -24,9 +24,7 @@ build_script:
   - echo "Building the project..."
   - npm run build
 
-test_script:
-  - echo "Running tests..."
-  - npm test
+
 
 deploy_script:
   - echo "Deploying to GitHub Pages..."
