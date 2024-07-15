@@ -23,14 +23,7 @@ before_build:
 build_script:
   - echo "Building the project..."
   - npm run build
+  - echo "Build finished"
 
 
 
-deploy_script:
-  - echo "Deploying to GitHub Pages..."
-  - cp -r dist/* .  
-  - git config user.name "AppVeyor"  
-  - git config user.email "ci@appveyor.com"  
-  - git config credential.helper "store --file=$HOME/.git-credentials"  
-  - echo "https://$GITHUB_TOKEN:x-oauth-basic@github.com" > "$HOME/.git-credentials"  
-  - git push origin HEAD:gh-pages  
